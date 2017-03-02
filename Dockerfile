@@ -24,13 +24,13 @@ RUN pacman --noconfirm -S ca-certificates-mozilla
 RUN pacman --noconfirm -S sudo
 RUN pacman --noconfirm -S wget
 RUN pacman --noconfirm -S base-devel
+RUN pacman -S --noconfirm wget base-devel yajl
 ADD install_aur.sh /tmp/install_aur.sh
 RUN chmod +x /tmp/install_aur.sh
-RUN pacman -S --noconfirm wget base-devel yajl
 USER user
+WORKDIR /tmp
 RUN /tmp/install_aur.sh package-query
 RUN /tmp/install_aur.sh yaourt
 
+RUN yaourt -V
 
-# running
-#ENTRYPOINT ['/bin/bash']

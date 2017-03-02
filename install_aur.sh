@@ -10,15 +10,19 @@ else
 fi
 
 
-# download package and uncompress
-cd /tmp
+# download and uncompress package
+sudo chown user -R /tmp
+cd /tmp/install_aur
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$pkgname.tar.gz
 tar zxvf $pkgname.tar.gz
-cd $pkgname
 
 
 # install package
+cd $pkgname
 makepkg -s
-ls -al
-echo $pkgname*.pkg.tar.xz
-sudo pacman -U --noconfirm $pkgname*.pkg.tar.xz
+sudo pacman -U --noconfirm *.pkg.tar.xz
+
+
+# clean
+rm -r /tmp/$pkgname*
+
